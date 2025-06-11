@@ -1,8 +1,16 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { products } from './data'
 import { Composer, ProviderName } from './services/ai/composer'
 
 const app = new Hono()
+
+app.use('*', cors({
+  origin: "*",
+  allowMethods: ['GET', 'OPTIONS'],
+  allowHeaders: ['*'],
+}))
+
 
 app.get('/', (c) => {
   return c.text("hello world")
